@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    form{
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+    }
+</style>
+<script>
+    function crearProducto(event){
+        event.preventDefault();
+
+        let producto={
+            nombre: document.getElementById("nombre").value,
+            descripcion: document.getElementById("descripcion").value,
+            precio:document.getElementById("precio").value,
+        };
+
+        fetch("http://localhost:3000/productos", {
+            headers: {
+                "Content-Type": "Application/json",
+            },
+            method: "POST",
+            body: JSON.stringify(producto),
+        })
+    }
+</script>
+<body>
+    <form onsubmit="crearProducto(event);">
+        <input type="text"  name="nombre" id="nombre" placeholder="Nombre" />
+        <textarea  id="descripcion" name="descripcion" placeholder="Description"></textarea>
+        <input type="number"  name="" id="precio" placeholder="precio" />
+        <input type="submit" value="Crear producto"/>
+    </form>
+    
+</body>
+</html>
